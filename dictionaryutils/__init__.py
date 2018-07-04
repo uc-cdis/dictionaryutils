@@ -1,5 +1,6 @@
 from .json_load import json_loads_byteified
 from .errors import DictionaryError
+from .version_data import DICTVERSION, DICTCOMMIT
 
 from copy import deepcopy
 from collections import namedtuple
@@ -82,7 +83,10 @@ def dump_schemas_from_dir(directory):
     """Dump schema as a json"""
 
     with visit_directory(directory):
-        return {path: load_yaml(path) for path in glob.glob('*.yaml')}
+        result = {path: load_yaml(path) for path in glob.glob('*.yaml')}
+        result['_dict_commit'] = DICTCOMMIT
+        result['_dict_version'] = DICTVERSION
+        return result
 
 
 def load_schemas_from_dir(directory, schemas=None, resolvers=None):
