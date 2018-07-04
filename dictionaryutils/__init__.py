@@ -84,8 +84,10 @@ def dump_schemas_from_dir(directory):
 
     with visit_directory(directory):
         result = {path: load_yaml(path) for path in glob.glob('*.yaml')}
-        result['_dict_commit'] = DICTCOMMIT
-        result['_dict_version'] = DICTVERSION
+        if not '_settings.yaml' in result:
+            result['_settings.yaml'] = {}
+        result['_settings.yaml']['_dict_commit'] = DICTCOMMIT
+        result['_settings.yaml']['_dict_version'] = DICTVERSION
         return result
 
 
