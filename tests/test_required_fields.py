@@ -47,3 +47,10 @@ def test_required_ubiquitous_fields():
             for field in required_fields:
                 assert field in schema['properties'], \
                     '{} is required but not in {}'.format(field, schema['id'])
+
+def test_id_matches():
+    # file names must match id files...
+    for key, schema in dictionary.schema.items():
+        assert key == schema['id'], \
+            '{} file has unmatched id {}'.format(key, schema['id'])
+
