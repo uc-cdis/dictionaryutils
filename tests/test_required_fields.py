@@ -35,7 +35,7 @@ def test_required_program_fields():
     schema = dictionary.schema['program']
     for field in required_fields:
         assert field in schema['properties'], \
-            '{} is required for project'.format(field)
+            '{} is required for program'.format(field)
 
 def test_required_ubiquitous_fields():
     required_fields = [
