@@ -1,5 +1,8 @@
+from contextlib import contextmanager
+import glob
+import os
+import yaml
 from dictionaryutils import dictionary
-
 
 def test_required_nodes():
     required_nodes = [
@@ -50,7 +53,24 @@ def test_required_ubiquitous_fields():
 
 def test_id_matches():
     # file names must match id files...
-    for key, schema in dictionary.schema.items():
-        assert key == schema['id'], \
-            '{} file has unmatched id {}'.format(key, schema['id'])
+    @contextmanager
+    def visit_directory(path):
+        cdir = os.getcwd()
+        try:
+            os.chdir(path)
+            yield os.getcwd()
+        finally:
+            os.chdir(cdir)
+
+
+    def load_yaml(name):
+        with open(name, 'r') as f:
+            return yaml.safe_load(f)
+
+    with visit_directory('../gdcdictionary/schemas/'):
+        for path in glob.glob("*.yaml"):
+            filename = os.path.splitext(path)[0]
+            schema = load_yaml(path)
+            assert filename == schema['id'], \
+                '{} file has unmatched id {}'.format(path, schema['id'])
 
