@@ -71,6 +71,7 @@ def test_id_matches():
         for path in glob.glob("*.yaml"):
             filename = os.path.splitext(path)[0]
             schema = load_yaml(path)
-            assert filename == schema['id'], \
-                '{} file has unmatched id {}'.format(path, schema['id'])
+            if 'id' in schema:
+                assert filename == schema['id'], \
+                    '{} file has unmatched id {}'.format(path, schema['id'])
 
