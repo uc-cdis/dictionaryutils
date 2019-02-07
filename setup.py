@@ -18,6 +18,6 @@ setup(
     name="dictionaryutils",
     version=get_version(),
     packages=find_packages(),
-    install_requires=["PyYAML==3.11", "jsonschema==2.5.1"],
+    install_requires=["PyYAML==4.2b1", "jsonschema==2.5.1"],
     package_data={"dictionaryutils": ["schemas/*.yaml"]},
 )
