@@ -1,6 +1,13 @@
-FROM python:2.7
+FROM python:2.7-alpine
 
-RUN pip install --upgrade pip
+RUN apk --no-cache add \
+        ca-certificates \
+        gcc \
+	git \
+        libffi-dev \
+        musl-dev \
+        postgresql-dev \
+    && pip install --upgrade pip
 
 COPY . /dictionaryutils
 
