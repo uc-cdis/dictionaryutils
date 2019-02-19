@@ -10,7 +10,7 @@ Say you have a dictionary you are building locally and you want to see if it wil
 
 You can add a simple alias to your `.bash_profile` to enable a quick test command:
 ```
-testdict() { docker run --rm -v $(pwd):/dictionary quay.io/uc-cdis/dictionaryutils:master; }
+testdict() { docker run --rm -v $(pwd):/dictionary quay.io/cdis/dictionaryutils:master; }
 ```
 
 Then from the directory containing the `gdcdictionary` directory run `testdict`.
