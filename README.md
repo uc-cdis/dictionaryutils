@@ -5,6 +5,16 @@ It can be used to:
 - dump schemas to a file that can be uploaded to s3 as an artifact.
 - load schema file from an url to a python object that can be used by services
 
+## Test for dictionary validity with Docker
+Say you have a dictionary you are building locally and you want to see if it will pass the tests.
+
+You can add a simple alias to your `.bash_profile` to enable a quick test command:
+```
+testdict() { docker run --rm -v $(pwd):/dictionary quay.io/uc-cdis/dictionaryutils:master; }
+```
+
+Then from the directory containing the `gdcdictionary` directory run `testdict`.
+
 ## Use dictionaryutils to load a dictionary
 ```
 from dictionaryutils import DataDictionary
