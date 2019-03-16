@@ -15,9 +15,9 @@ def test_required_fields_in_links():
     for schema in dictionary.schema.values():
         for link in schema["links"]:
             if (
-              not "subgroup" in link
-              and not link["target_type"] == "program"
-              and not dictionary.schema[link["target_type"]]["category"] == "internal"
+                not "subgroup" in link
+                and not link["target_type"] == "program"
+                and not dictionary.schema[link["target_type"]]["category"] == "internal"
             ):
                 for nodeprops in schema["properties"][link["name"]]["anyOf"][0][
                     "items"
