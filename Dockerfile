@@ -14,4 +14,4 @@ RUN pip install -r /dictionaryutils/dev-requirements.txt
 
 COPY . /dictionaryutils
 
-CMD cd /dictionary; rm -rf build dictionaryutils; python setup.py install --force && cp -r /dictionaryutils . && cd /dictionary/dictionaryutils; nosetests -s -v; export SUCCESS=$?; cd ..; rm -rf build dictionaryutils; exit $SUCCESS
+CMD cd /dictionary; rm -rf build dictionaryutils dist gdcdictionary.egg-info; python setup.py install --force && cp -r /dictionaryutils . && cd /dictionary/dictionaryutils; nosetests -s -v; export SUCCESS=$?; cd ..; rm -rf build dictionaryutils dist gdcdictionary.egg-info; exit $SUCCESS
