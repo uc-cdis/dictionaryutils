@@ -20,7 +20,7 @@ Then from the directory containing the `gdcdictionary` directory run `testdict`.
 If you wish to generate fake simulated data you can also do that with dictionaryutils and the data-simulator.
 
 ```
-simdata() { docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata quay.io/cdis/dictionaryutils:master /bin/sh -c "cd /dictionary && python setup.py install --force && python /src/datasimulator/bin/data-simulator simulate --path /simdata/ $*"; }
+simdata() { docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata quay.io/cdis/dictionaryutils:master /bin/sh -c "cd /dictionary && python setup.py install --force; python /src/datasimulator/bin/data-simulator simulate --path /simdata/ $*; export SUCCESS=$?; rm -rf build dictionaryutils dist gdcdictionary.egg-info; exit $SUCCESS"; }
 simdataurl() { docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata quay.io/cdis/dictionaryutils:master /bin/sh -c "python /src/datasimulator/bin/data-simulator simulate --path /simdata/ $*"; }
 
 ```
