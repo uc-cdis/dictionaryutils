@@ -9,8 +9,8 @@ RUN apk --no-cache add \
         libffi-dev \
         musl-dev \
         postgresql-dev \
-    && pip install --upgrade pip
-    && mkdir -p /usr/share/dict/
+    && pip install --upgrade pip \
+    && mkdir -p /usr/share/dict/ \
     && aspell -d en dump master > /usr/share/dict/words
 
 COPY dev-requirements.txt /dictionaryutils/dev-requirements.txt
