@@ -1,6 +1,8 @@
 FROM python:2.7-alpine
 
 RUN apk --no-cache add \
+        aspell \
+        aspell-en \
         ca-certificates \
         gcc \
 	git \
@@ -8,6 +10,8 @@ RUN apk --no-cache add \
         musl-dev \
         postgresql-dev \
     && pip install --upgrade pip
+    && mkdir -p /usr/share/dict/
+    && aspell -d en dump master > /usr/share/dict/words
 
 COPY dev-requirements.txt /dictionaryutils/dev-requirements.txt
 RUN pip install -r /dictionaryutils/dev-requirements.txt
