@@ -15,16 +15,17 @@ def test_required_nodes():
 
 
 def test_required_data_fields():
-    required_fields = ["data_type", "data_format", "data_category", "object_id"]
+    defined_fields = ["data_type", "data_format", "data_category", "object_id"]
+    required_fields = ["data_type", "data_format", "data_category"]
     invalid_defined = []
     invalid_required = []
     for schema in dictionary.schema.values():
         if schema["category"].endswith("_file"):
-            for field in required_fields:
+            for field in defined_fields:
                 if field not in schema["properties"]:
                     invalid_defined.append("{}: {}".format(schema["id"], field))
                 else:
-                    if field not in schema["required"]:
+                    if field in required_fields and field not in schema["required"]:
                         invalid_required.append("{}: {}".format(schema["id"], field))
     assert (
         not invalid_defined
