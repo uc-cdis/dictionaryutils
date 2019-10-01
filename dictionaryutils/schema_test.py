@@ -22,7 +22,7 @@ from gdcdictionary import gdcdictionary, SCHEMA_DIR
 
 def load_yaml_schema(path):
     with open(path, "r") as f:
-        return yaml.load(f)
+        return yaml.safe_load(f)
 
 
 def load_project_specific_schema():
@@ -113,7 +113,7 @@ def validate_schemata(schemata, metaschema):
 class SchemaTest(unittest.TestCase):
     def setUp(self):
         self.dictionary = gdcdictionary
-        self.definitions = yaml.load(
+        self.definitions = yaml.safe_load(
             open(os.path.join(CUR_DIR, "schemas", "_definitions.yaml"), "r")
         )
 

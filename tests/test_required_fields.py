@@ -11,19 +11,31 @@ def test_required_nodes():
     for node in required_nodes:
         assert (
             node in dictionary.schema
-        ), "{} is a required node but not in the dictionary".format(
-            node
-        )
+        ), "{} is a required node but not in the dictionary".format(node)
 
 
 def test_required_data_fields():
     required_fields = ["data_type", "data_format", "data_category", "object_id"]
+    invalid_defined = []
+    invalid_required = []
     for schema in dictionary.schema.values():
         if schema["category"].endswith("_file"):
             for field in required_fields:
-                assert (
-                    field in schema["properties"]
-                ), "{} is required but not in {}".format(field, schema["id"])
+                if field not in schema["properties"]:
+                    invalid_defined.append("{}: {}".format(schema["id"], field))
+                else:
+                    if field not in schema["required"]:
+                        invalid_required.append("{}: {}".format(schema["id"], field))
+    assert (
+        not invalid_defined
+    ), "Fields should be required but are not defined in schema: {}".format(
+        invalid_defined
+    )
+    assert (
+        not invalid_required
+    ), "Fields should be required but are not required in schema: {}".format(
+        invalid_required
+    )
 
 
 def test_required_project_fields():
