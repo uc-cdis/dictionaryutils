@@ -102,3 +102,47 @@ def test_id_matches():
                 assert filename == schema["id"], "{} file has unmatched id {}".format(
                     path, schema["id"]
                 )
+
+
+def test_enums_dont_have_type():
+    """
+    When a property is of type "enum", the "type" field should not
+    be specified.
+    Checking this avoids bugs when using the data simulator: it uses the
+    "type" field to decide which type of data to simulate when "type" is
+    specified. When it's not specified, it falls back on the type of the
+    "enum" values.
+    """
+    for schema in dictionary.schema.values():
+        props = schema.get("properties", {})
+        for prop_id, prop_details in props.items():
+            if "enum" in prop_details:
+                assert (
+                    "type" not in prop_details
+                ), 'Property "{}" of node "{}" is an enum, so field "type" should not be specified.'.format(
+                    prop_id, schema["id"]
+                )
+
+
+def test_arrays_have_items():
+    for schema in dictionary.schema.values():
+        props = schema.get("properties", {})
+        for prop_id, prop_details in props.items():
+            if prop_details.get("type") == "array":
+                assert (
+                    "items" in prop_details
+                ), 'Property "{}" of node "{}" is of type "array", so field "items" should be specified.'.format(
+                    prop_id, schema["id"]
+                )
+
+
+def test_file_size_is_integer():
+    for schema in dictionary.schema.values():
+        props = schema.get("properties", {})
+        if "file_size" in props:
+            t = props["file_size"].get("type")
+            assert (
+                t == "integer"
+            ), 'Property "file_size" of node "{}" should be of type "integer", but is of type "{}".'.format(
+                schema["id"], t
+            )
