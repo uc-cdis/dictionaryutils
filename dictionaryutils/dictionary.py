@@ -17,7 +17,7 @@ from cdislogging import get_logger
 from dictionaryutils import add_default_schema
 
 
-logger = get_logger(__name__)
+logger = get_logger('__name__', log_level='info')
 
 
 # Get this module as a variable so its attributes can be set later.
