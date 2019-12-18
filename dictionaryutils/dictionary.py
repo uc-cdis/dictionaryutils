@@ -17,7 +17,7 @@ from cdislogging import get_logger
 from dictionaryutils import add_default_schema
 
 
-logger = get_logger('__name__', log_level='info')
+logger = get_logger("__name__", log_level="info")
 
 
 # Get this module as a variable so its attributes can be set later.
@@ -64,4 +64,6 @@ try:
     add_default_schema(gdcdictionary)
     init(gdcdictionary)
 except Exception as e:
-    logger.error("Unable to initialize gdcdictionary: {}\n{}".format(e, traceback.format_exc()))
+    logger.error(
+        "Unable to initialize gdcdictionary: {}\n{}".format(e, traceback.format_exc())
+    )
