@@ -35,8 +35,7 @@ def visit_directory(path):
 
 def load_yaml(name):
     """Return contents of yaml file as dict"""
-    print(name)
-    with open(name, "r") as f:
+    with open(name, "r", encoding="utf8") as f:
         return yaml.safe_load(f)
 
 
