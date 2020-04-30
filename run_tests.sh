@@ -13,6 +13,7 @@ fi
 pip install -r dev-requirements.txt
 # always use this version of dictionaryutils...
 pip uninstall -y dictionaryutils
+pip uninstall -y gen3dictionary
 python setup.py install --force
 nosetests -s -v
 python bin/dump_schema.py
