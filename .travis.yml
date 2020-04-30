@@ -3,7 +3,6 @@ dist: xenial
 python: 3.6
 before_script:
 - git clone https://github.com/uc-cdis/datadictionary && (cd datadictionary && yes | python setup.py install)
-- pip install gen3dictionary
 script:
 - ./run_tests.sh
 before_deploy:
