@@ -3,6 +3,8 @@ dist: xenial
 python: 3.6
 before_script:
 - git clone https://github.com/uc-cdis/datadictionary && (cd datadictionary && yes | python setup.py install)
+- git checkout feat/format_upgrade 
+
 script:
 - ./run_tests.sh
 before_deploy:

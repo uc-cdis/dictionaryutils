@@ -40,7 +40,7 @@ properties:
   type:
     enum: [ "data_release" ]
   id:
-    $ref: "_definitions.yaml#/UUID"
+    $ref: "_definitions.yaml#/uuid"
     systemAlias: node_id
   created_datetime:
     $ref: "_definitions.yaml#/datetime"
