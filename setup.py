@@ -27,7 +27,7 @@ setup(
         "requests~=2.18",
         "cdislogging~=1.0",
         # for testing purpose
-        "datasimulator","
+        "datasimulator",
     ],
     dependency_links=[
         # for testing purpose
