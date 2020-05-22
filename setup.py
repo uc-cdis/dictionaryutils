@@ -26,6 +26,12 @@ setup(
         "jsonschema~=3.2",
         "requests~=2.18",
         "cdislogging~=1.0",
+        # for testing purpose
+        "datasimulator","
+    ],
+    dependency_links=[
+        # for testing purpose
+        "git+https://github.com/uc-cdis/data-simulator.git@feat/format_upgrade#egg=datasimulator"
     ],
     package_data={"dictionaryutils": ["schemas/*.yaml"]},
 )

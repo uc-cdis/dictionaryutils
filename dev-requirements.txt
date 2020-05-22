@@ -3,5 +3,7 @@ rstr==2.2.6
 cdislogging
 -e git+https://git@github.com/NCI-GDC/cdisutils.git@1.4.0#egg=cdisutils
 psqlgraph==3.0.0
--e git+https://git@github.com/uc-cdis/data-simulator.git@1.2.0#egg=datasimulator
+# for testing purpose
+# -e git+https://git@github.com/uc-cdis/data-simulator.git@1.2.0#egg=datasimulator
+-e git+https://git@github.com/uc-cdis/data-simulator.git@feat/format_upgrade#egg=datasimulator
 gen3datamodel==3.0.0
