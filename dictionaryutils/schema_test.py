@@ -94,7 +94,8 @@ def validate_entity(entity, schemata, project=None, name=""):
 
 def validate_schemata(schemata, metaschema):
     # https://github.com/graphql-python/graphql-core-legacy/blob/v2.3.2/graphql/utils/assert_valid_name.py#L3
-    graphql_name_regex = re.compile("^[_a-zA-Z][_a-zA-Z0-9]*$")
+    graphql_name_regex = "^[_a-zA-Z][_a-zA-Z0-9]*$"
+    compiled_regex = re.compile(graphql_name_regex)
 
     # validate schemata
     print("Validating schemas against metaschema...")
@@ -114,7 +115,7 @@ def validate_schemata(schemata, metaschema):
                 assert_link_is_also_prop(link)
 
         for prop in s["properties"]:
-            match = graphql_name_regex.match(prop)
+            match = compiled_regex.match(prop)
             assert match, "prop name {} in {} does not match {}".format(
                 prop, s["id"], graphql_name_regex
             )
