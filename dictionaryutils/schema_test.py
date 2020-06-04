@@ -9,15 +9,16 @@ Examples are at the end.
 """
 
 
-from jsonschema import validate, ValidationError
-import copy
-import yaml
-import glob
-import os
 import argparse
-import json
-import unittest
+import copy
 from gdcdictionary import gdcdictionary, SCHEMA_DIR
+import glob
+import json
+from jsonschema import validate, ValidationError
+import os
+import re
+import unittest
+import yaml
 
 
 def load_yaml_schema(path):
@@ -92,6 +93,9 @@ def validate_entity(entity, schemata, project=None, name=""):
 
 
 def validate_schemata(schemata, metaschema):
+    # https://github.com/graphql-python/graphql-core-legacy/blob/v2.3.2/graphql/utils/assert_valid_name.py#L3
+    graphql_name_regex = re.compile("^[_a-zA-Z][_a-zA-Z0-9]*$")
+
     # validate schemata
     print("Validating schemas against metaschema...")
     for s in schemata.values():
@@ -108,6 +112,12 @@ def validate_schemata(schemata, metaschema):
         for subgroup in [l["subgroup"] for l in s["links"] if "name" not in l]:
             for link in [l["name"] for l in subgroup if "name" in l]:
                 assert_link_is_also_prop(link)
+
+        for prop in s["properties"]:
+            match = graphql_name_regex.match(prop)
+            assert match, "prop name {} in {} does not match {}".format(
+                prop, s["id"], graphql_name_regex
+            )
 
 
 class SchemaTest(unittest.TestCase):
