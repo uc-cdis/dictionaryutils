@@ -216,6 +216,14 @@ class DataDictionary(object):
 
         return resolution
 
+    def resolve_local_refs(self, refs, obj, root):
+        """Converts a string ref to list of refs & resolves the references
+        """
+        if not isinstance(refs, list):
+            refs = [refs]
+        for ref in refs:
+            obj.update(self.resolve_reference(ref, root))
+    
     def resolve_schema(self, obj, root):
         """Recursively resolves all references in a schema against
         ``self.resolvers``.
@@ -232,8 +240,8 @@ class DataDictionary(object):
         if isinstance(obj, dict):
             all_refkeys = [k for k in obj.keys() if k.startswith(refkey)]
             for key in all_refkeys:
-                val = obj.pop(key)
-                obj.update(self.resolve_reference(val, root))
+                refs = obj.pop(key)
+                self.resolve_local_refs(refs, obj, root)
             return {k: self.resolve_schema(v, root) for k, v in obj.items()}
         elif isinstance(obj, list):
             return [self.resolve_schema(item, root) for item in obj]
@@ -243,7 +251,7 @@ class DataDictionary(object):
     def allow_nulls(self):
         """
         Adds "none" to the types of non required fields in the dictionary.
-        This is done so we can remove properties from entities by updating the property to null. 
+        This is done so we can remove properties from entities by updating the property to null.
         """
         for node_properties in self.schema.values():
             required = node_properties.get("required", [])
