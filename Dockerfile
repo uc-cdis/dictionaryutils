@@ -13,11 +13,11 @@ RUN apk --no-cache add \
     && mkdir -p /usr/share/dict/ \
     && aspell -d en dump master > /usr/share/dict/words
 
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+RUN pip install poetry==1.0.0
 COPY . /src/
 WORKDIR /src
 RUN python -m venv /env && . /env/bin/activate && poetry install
 
 COPY . /dictionaryutils
 
-CMD cd /dictionary; rm -rf build dictionaryutils dist gdcdictionary.egg-info; python setup.py install --force && cp -r /dictionaryutils . && cd /dictionary/dictionaryutils; nosetests -s -v; export SUCCESS=$?; cd ..; rm -rf build dictionaryutils dist gdcdictionary.egg-info; exit $SUCCESS
+CMD cd /dictionary; rm -rf build dictionaryutils dist gdcdictionary.egg-info; poetry install && cp -r /dictionaryutils . && cd /dictionary/dictionaryutils; nosetests -s -v; export SUCCESS=$?; cd ..; rm -rf build dictionaryutils dist gdcdictionary.egg-info; exit $SUCCESS
