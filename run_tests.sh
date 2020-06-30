@@ -10,6 +10,7 @@ if [[ -d ../.git && -d ../gdcdictionary ]]; then
   )
 fi
 
+# Installing poetry using bootstrap script instead of pip install poetry to avoid any dependency conflicts. 
 curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 
 source $HOME/.poetry/env
@@ -17,10 +18,6 @@ source $HOME/.poetry/env
 which poetry
 
 poetry install -v
-
-# pip install -r dev-requirements.txt
-# always use this version of dictionaryutils...
-# pip uninstall -y dictionaryutils
 
 # Here is a story. While updating data-simulator the new dependency was introduced there: gen3dictionary.
 # And because this new dependency installed after the setup.py for testing the dictionary is run,
@@ -30,7 +27,6 @@ if [[ -d ../.git && -d ../gdcdictionary ]]; then
   pip uninstall -y gen3dictionary
 fi
 
-# python setup.py install --force
 nosetests -s -v
 python bin/dump_schema.py
 set +e
