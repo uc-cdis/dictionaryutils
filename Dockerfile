@@ -20,4 +20,4 @@ RUN python -m venv /env && . /env/bin/activate && poetry install
 
 COPY . /dictionaryutils
 
-CMD cd /dictionary; rm -rf build dictionaryutils dist gdcdictionary.egg-info; poetry install && cp -r /dictionaryutils . && cd /dictionary/dictionaryutils; nosetests -s -v; export SUCCESS=$?; cd ..; rm -rf build dictionaryutils dist gdcdictionary.egg-info; exit $SUCCESS
+CMD cd /dictionary; rm -rf build dictionaryutils dist gdcdictionary.egg-info; python setup.py install --force && cp -r /dictionaryutils . && cd /dictionary/dictionaryutils; nosetests -s -v; export SUCCESS=$?; cd ..; rm -rf build dictionaryutils dist gdcdictionary.egg-info; exit $SUCCESS
