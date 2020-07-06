@@ -60,7 +60,6 @@ xmltodict = "0.9.2"
 reference = "6439b04690d21212b62b33f85b550001011e7469"
 type = "git"
 url = "https://github.com/NCI-GDC/cdisutils.git"
-
 [[package]]
 category = "dev"
 description = "Python package for providing Mozilla's CA Bundle."
@@ -135,7 +134,6 @@ setuptools = "36.6.0"
 reference = "299ee2e232364622be3838a92be6cf61652e08bd"
 type = "git"
 url = "https://github.com/uc-cdis/data-simulator.git"
-
 [[package]]
 category = "dev"
 description = "An implementation of lxml.xmlfile for the standard library"
@@ -542,8 +540,8 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "26c53f21474d62c0a00bd5038d4afeaba8cb4d45a0921415c6b8e52b37a3aec7"
-python-versions = "^3.7"
+content-hash = "4d03bed1adb7d36425882da7c7d3c6bba8f3638be3bc1b667203c229cf4e3a0c"
+python-versions = "^3.6"
 
 [metadata.files]
 atomicwrites = [
