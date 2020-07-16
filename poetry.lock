@@ -35,6 +35,14 @@ zstandard = ["zstandard"]
 
 [[package]]
 category = "dev"
+description = "Amazon Web Services Library"
+name = "boto"
+optional = false
+python-versions = "*"
+version = "2.49.0"
+
+[[package]]
+category = "main"
 description = "Standardized logging tool and format for cdis applications"
 name = "cdislogging"
 optional = false
@@ -47,21 +55,19 @@ description = "Miscellaneous utilities useful for interaction with CDIS systems.
 name = "cdisutils"
 optional = false
 python-versions = "*"
-version = "0.1.1"
+version = "1.2.2"
 
 [package.dependencies]
-ndg-httpsclient = "0.4.3"
-openpyxl = "2.4.0"
-pyOpenSSL = "16.2.0"
-setuptools = "*"
-xmltodict = "0.9.2"
+boto = ">=2.36.0"
+indexclient = ">=1.5.6"
+ndg-httpsclient = ">=0.4.3"
+openpyxl = ">=2.4.0"
+pyOpenSSL = ">=16.2.0"
+python-dateutil = ">=2.4.2"
+xmltodict = ">=0.9.2"
 
-[package.source]
-reference = "6439b04690d21212b62b33f85b550001011e7469"
-type = "git"
-url = "https://github.com/NCI-GDC/cdisutils.git"
 [[package]]
-category = "dev"
+category = "main"
 description = "Python package for providing Mozilla's CA Bundle."
 name = "certifi"
 optional = false
@@ -80,7 +86,7 @@ version = "1.14.0"
 pycparser = "*"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Universal encoding detector for Python 2 and 3"
 name = "chardet"
 optional = false
@@ -134,6 +140,7 @@ setuptools = "36.6.0"
 reference = "299ee2e232364622be3838a92be6cf61652e08bd"
 type = "git"
 url = "https://github.com/uc-cdis/data-simulator.git"
+
 [[package]]
 category = "dev"
 description = "An implementation of lxml.xmlfile for the standard library"
@@ -178,15 +185,15 @@ description = "Simple Python interface for Graphviz"
 name = "graphviz"
 optional = false
 python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*"
-version = "0.14"
+version = "0.14.1"
 
 [package.extras]
 dev = ["tox (>=3)", "flake8", "pep8-naming", "wheel", "twine"]
-docs = ["sphinx (>=1.7)", "sphinx-rtd-theme"]
-test = ["mock (>=3)", "pytest (>=3.4,<3.10.0 || >3.10.0)", "pytest-mock (>=1.8)", "pytest-cov"]
+docs = ["sphinx (>=1.8)", "sphinx-rtd-theme"]
+test = ["mock (>=3)", "pytest (>=4)", "pytest-mock (>=2)", "pytest-cov"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Internationalized Domain Names in Applications (IDNA)"
 name = "idna"
 optional = false
@@ -211,6 +218,17 @@ testing = ["packaging", "pep517", "importlib-resources (>=1.3)"]
 
 [[package]]
 category = "dev"
+description = ""
+name = "indexclient"
+optional = false
+python-versions = "*"
+version = "2.1.0"
+
+[package.dependencies]
+requests = ">=2.5.2,<3.0.0"
+
+[[package]]
+category = "dev"
 description = "Julian dates from proleptic Gregorian and Julian calendars."
 name = "jdcal"
 optional = false
@@ -218,7 +236,7 @@ python-versions = "*"
 version = "1.4.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "An implementation of JSON Schema validation for Python"
 name = "jsonschema"
 optional = false
@@ -241,8 +259,8 @@ category = "dev"
 description = "Provides enhanced HTTPS support for httplib and urllib2 using PyOpenSSL"
 name = "ndg-httpsclient"
 optional = false
-python-versions = "*"
-version = "0.4.3"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.5.1"
 
 [package.dependencies]
 PyOpenSSL = "*"
@@ -261,11 +279,11 @@ category = "dev"
 description = "A Python library to read/write Excel 2010 xlsx/xlsm files"
 name = "openpyxl"
 optional = false
-python-versions = "*"
-version = "2.4.0"
+python-versions = ">=3.6,"
+version = "3.0.4"
 
 [package.dependencies]
-et_xmlfile = "*"
+et-xmlfile = "*"
 jdcal = "*"
 
 [[package]]
@@ -368,11 +386,15 @@ description = "Python wrapper module around the OpenSSL library"
 name = "pyopenssl"
 optional = false
 python-versions = "*"
-version = "16.2.0"
+version = "19.1.0"
 
 [package.dependencies]
-cryptography = ">=1.3.4"
+cryptography = ">=2.8"
 six = ">=1.5.2"
+
+[package.extras]
+docs = ["sphinx", "sphinx-rtd-theme"]
+test = ["flaky", "pretend", "pytest (>=3.0.1)"]
 
 [[package]]
 category = "dev"
@@ -428,7 +450,7 @@ python-versions = "*"
 version = "2020.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "YAML parser and emitter for Python"
 name = "pyyaml"
 optional = false
@@ -436,7 +458,7 @@ python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
 version = "5.3.1"
 
 [[package]]
-category = "dev"
+category = "main"
 description = "Python HTTP for Humans."
 name = "requests"
 optional = false
@@ -490,7 +512,7 @@ postgresql_psycopg2cffi = ["psycopg2cffi"]
 pymysql = ["pymysql"]
 
 [[package]]
-category = "dev"
+category = "main"
 description = "HTTP library with thread-safe connection pooling, file post, and more."
 name = "urllib3"
 optional = false
@@ -523,8 +545,8 @@ category = "dev"
 description = "Makes working with XML feel like you are working with JSON"
 name = "xmltodict"
 optional = false
-python-versions = "*"
-version = "0.9.2"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.12.0"
 
 [[package]]
 category = "dev"
@@ -540,7 +562,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "4d03bed1adb7d36425882da7c7d3c6bba8f3638be3bc1b667203c229cf4e3a0c"
+content-hash = "051a7a707cd77eee5739213c7599bf15c8e0ea396d9c56ba9754b706cdd68daf"
 python-versions = "^3.6"
 
 [metadata.files]
@@ -555,10 +577,16 @@ attrs = [
 avro = [
     {file = "avro-1.10.0.tar.gz", hash = "sha256:bbf9f89fd20b4cf3156f10ec9fbce83579ece3e0403546c305957f9dac0d2f03"},
 ]
+boto = [
+    {file = "boto-2.49.0-py2.py3-none-any.whl", hash = "sha256:147758d41ae7240dc989f0039f27da8ca0d53734be0eb869ef16e3adcfa462e8"},
+    {file = "boto-2.49.0.tar.gz", hash = "sha256:ea0d3b40a2d852767be77ca343b58a9e3a4b00d9db440efb8da74b4e58025e5a"},
+]
 cdislogging = [
     {file = "cdislogging-1.0.0.tar.gz", hash = "sha256:a1cc2e48d5fc26d4b354b80c6497f1f1136f3e3e4f1d1855de8980ccf497fa0a"},
 ]
-cdisutils = []
+cdisutils = [
+    {file = "cdisutils-1.2.2.tar.gz", hash = "sha256:297a38210eea8aee4cd8712c16da120843242ea119d7e08a4844119485f691c3"},
+]
 certifi = [
     {file = "certifi-2020.6.20-py2.py3-none-any.whl", hash = "sha256:8fc0819f1f30ba15bdb34cceffb9ef04d99f420f68eb75d901e9560b8749fc41"},
     {file = "certifi-2020.6.20.tar.gz", hash = "sha256:5930595817496dd21bb8dc35dad090f1c2cd0adfaf21204bf6732ca5d8ee34d3"},
@@ -635,8 +663,8 @@ gen3dictionary = [
     {file = "gen3dictionary-2.0.1.tar.gz", hash = "sha256:59731df74e4b0ef719e12425f0a4e064a8182305448825f9237467f60c337446"},
 ]
 graphviz = [
-    {file = "graphviz-0.14-py2.py3-none-any.whl", hash = "sha256:cb0e878f90378489f17aab140b68e64e44b79e4cb59a530c8863d84bf2e2e5f5"},
-    {file = "graphviz-0.14.zip", hash = "sha256:e104ba036c8aef84320ec80560e544cd3cad68c9f90394b4e2b87bc44ab09791"},
+    {file = "graphviz-0.14.1-py2.py3-none-any.whl", hash = "sha256:088562ef6e3dad5e8dde9389caf4a84f768e65dcaa08238cfcdf36d2b30ccf61"},
+    {file = "graphviz-0.14.1.zip", hash = "sha256:f5aad52a652c06825dcc5ee018d920fca26aef339386866094597fb3f2f222ce"},
 ]
 idna = [
     {file = "idna-2.10-py2.py3-none-any.whl", hash = "sha256:b97d804b1e9b523befed77c48dacec60e6dcb0b5391d57af6a65a312a90648c0"},
@@ -645,6 +673,9 @@ idna = [
 importlib-metadata = [
     {file = "importlib_metadata-1.7.0-py2.py3-none-any.whl", hash = "sha256:dc15b2969b4ce36305c51eebe62d418ac7791e9a157911d58bfb1f9ccd8e2070"},
     {file = "importlib_metadata-1.7.0.tar.gz", hash = "sha256:90bb658cdbbf6d1735b6341ce708fc7024a3e14e99ffdc5783edea9f9b077f83"},
+]
+indexclient = [
+    {file = "indexclient-2.1.0.tar.gz", hash = "sha256:777476eb97febfcd663b7f9454fba5151dee4d17254bfa0dfb5ff040c59b8532"},
 ]
 jdcal = [
     {file = "jdcal-1.4.1-py2.py3-none-any.whl", hash = "sha256:1abf1305fce18b4e8aa248cf8fe0c56ce2032392bc64bbd61b5dff2a19ec8bba"},
@@ -659,9 +690,9 @@ more-itertools = [
     {file = "more_itertools-8.4.0-py3-none-any.whl", hash = "sha256:b78134b2063dd214000685165d81c154522c3ee0a1c0d4d113c80361c234c5a2"},
 ]
 ndg-httpsclient = [
-    {file = "ndg_httpsclient-0.4.3-py2-none-any.whl", hash = "sha256:5b1e1b1991990487e28e5b95e062c9d06f8f00e3cd79eaddc448ce06c5e3b776"},
-    {file = "ndg_httpsclient-0.4.3-py3-none-any.whl", hash = "sha256:28d62f2fc93dcd20793ddf2ce9ec1ab9f3458a11a784105a6d67f218ca53de63"},
-    {file = "ndg_httpsclient-0.4.3.tar.gz", hash = "sha256:7bfd8c5cfcbc241a93ca6a4e45f952650f5c7ecf7c49b1dbcf5f4d390240be0b"},
+    {file = "ndg_httpsclient-0.5.1-py2-none-any.whl", hash = "sha256:d2c7225f6a1c6cf698af4ebc962da70178a99bcde24ee6d1961c4f3338130d57"},
+    {file = "ndg_httpsclient-0.5.1-py3-none-any.whl", hash = "sha256:dd174c11d971b6244a891f7be2b32ca9853d3797a72edb34fa5d7b07d8fff7d4"},
+    {file = "ndg_httpsclient-0.5.1.tar.gz", hash = "sha256:d72faed0376ab039736c2ba12e30695e2788c4aa569c9c3e3d72131de2592210"},
 ]
 nose = [
     {file = "nose-1.3.7-py2-none-any.whl", hash = "sha256:dadcddc0aefbf99eea214e0f1232b94f2fa9bd98fa8353711dacb112bfcbbb2a"},
@@ -669,7 +700,8 @@ nose = [
     {file = "nose-1.3.7.tar.gz", hash = "sha256:f1bffef9cbc82628f6e7d7b40d7e255aefaa1adb6a1b1d26c69a8b79e6208a98"},
 ]
 openpyxl = [
-    {file = "openpyxl-2.4.0.tar.gz", hash = "sha256:21c02df20d626ebd2e92b3c33066ba3ad18520a92d4b6d734f4dee99b4289283"},
+    {file = "openpyxl-3.0.4-py2.py3-none-any.whl", hash = "sha256:6e62f058d19b09b95d20ebfbfb04857ad08d0833190516c1660675f699c6186f"},
+    {file = "openpyxl-3.0.4.tar.gz", hash = "sha256:d88dd1480668019684c66cfff3e52a5de4ed41e9df5dd52e008cbf27af0dbf87"},
 ]
 packaging = [
     {file = "packaging-20.4-py2.py3-none-any.whl", hash = "sha256:998416ba6962ae7fbd6596850b80e17859a5753ba17c32284f67bfff33784181"},
@@ -744,8 +776,8 @@ pycparser = [
     {file = "pycparser-2.20.tar.gz", hash = "sha256:2d475327684562c3a96cc71adf7dc8c4f0565175cf86b6d7a404ff4c771f15f0"},
 ]
 pyopenssl = [
-    {file = "pyOpenSSL-16.2.0-py2.py3-none-any.whl", hash = "sha256:26ca380ddf272f7556e48064bbcd5bd71f83dfc144f3583501c7ddbd9434ee17"},
-    {file = "pyOpenSSL-16.2.0.tar.gz", hash = "sha256:7779a3bbb74e79db234af6a08775568c6769b5821faecf6e2f4143edb227516e"},
+    {file = "pyOpenSSL-19.1.0-py2.py3-none-any.whl", hash = "sha256:621880965a720b8ece2f1b2f54ea2071966ab00e2970ad2ce11d596102063504"},
+    {file = "pyOpenSSL-19.1.0.tar.gz", hash = "sha256:9a24494b2602aaf402be5c9e30a0b82d4a5c67528fe8fb475e3f3bc00dd69507"},
 ]
 pyparsing = [
     {file = "pyparsing-2.4.7-py2.py3-none-any.whl", hash = "sha256:ef9d7589ef3c200abe66653d3f1ab1033c3c419ae9b9bdb1240a85b024efc88b"},
@@ -830,7 +862,8 @@ xlocal = [
     {file = "xlocal-0.5.zip", hash = "sha256:8ee1c1551294e366a3c307985ea2129e72717556a5736063c0e089c5fb868405"},
 ]
 xmltodict = [
-    {file = "xmltodict-0.9.2.tar.gz", hash = "sha256:275d1e68c95cd7e3ee703ddc3ea7278e8281f761680d6bdd637bcd00a5c59901"},
+    {file = "xmltodict-0.12.0-py2.py3-none-any.whl", hash = "sha256:8bbcb45cc982f48b2ca8fe7e7827c5d792f217ecf1792626f808bf41c3b86051"},
+    {file = "xmltodict-0.12.0.tar.gz", hash = "sha256:50d8c638ed7ecb88d90561beedbf720c9b4e851a9fa6c47ebd64e99d166d8a21"},
 ]
 zipp = [
     {file = "zipp-3.1.0-py3-none-any.whl", hash = "sha256:aa36550ff0c0b7ef7fa639055d797116ee891440eac1a56f378e2d3179e0320b"},

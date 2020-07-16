@@ -1,21 +1,20 @@
 language: python
 dist: xenial
 python: 3.6
+env:
+  global:
+  - secure: WYdy6W2pgm9L411IRzBuZHqTNtLPdn1Yyhyl5voBmZeLFla+H84BnjenepwRK0aPy+1tetZGaye/ChM5ewQJVR7Lk0prhbhppP5UwOtQMJh6fm20W3GYuclnnJzQ/VGcRqkqiTHvvkD9E3AgNlFzL1Q1lAZKImBjEOaXF5eN2d5DD90fZkWzrIHVrVO72Pnx9qnuJGGc+1RnS11TR+viijQK8zKxB2G414BVZ4j1apHYyruy0xUnyZ/PJh9GlFYs4lBNdWuHhCQo5MZcZr5fqQZFCmaxSg3NxSd5eGjQxqc1QnbULgDQwuFABv/5VbZWdzmM60vSQuMl1G3uEgWAx6VxFBIgXw8rAJ1Y+KukTwAjVM8zdrZ99vcjTTInNsjs5IpEFr+kaXplvcWFw96kLhOP3lfyjYEFcwt40Q25qhM1QqOR01I9aSnICbvp5SXiKRoZr1QwfD1m4aRbSmsshWlW79RiKijXzP77tA2Tngso9m12bSxY3geS2Scamh8JlXmUE0cPqyZeKeS4tel/Seds/5r0zwHDUQYxRyq8HAeoWqMwg90qptoOUOC6WCklVdiEe1OdxwfoGbRBH0tkeRQFhwmhRItwkpJa0SrSf1nMGUMTlzXfc5CPbXBiPwIOgKKjfrh3NwS1JksAI7XPxDWTmnygKW+TNjRM3aWx65Y=
 before_script:
 - git clone https://github.com/uc-cdis/datadictionary && (cd datadictionary && yes | python setup.py install)
 script:
-- ./run_tests.sh
+- "./run_tests.sh"
 before_deploy:
-- sed -i.bak "s/=get_version()/='$TRAVIS_TAG'/g" setup.py
-- cat setup.py
-- if [ $(python setup.py --version) == '0.0.0' ]; then travis_terminate 1; fi
+- poetry config pypi-token.pypi $PYPI_API_TOKEN
+- poetry build -f sdist
 deploy:
-  provider: pypi
-  user: uc-ctds
-  skip_existing: true
+  provider: script
+  script: poetry publish -n -vv
   skip_cleanup: true
-  password:
-    secure: j7bF5YHHnwbuGAoOfePyEW1qT5DQ91PAzidUFRhu1qn+O1rTX4AjzGmCDw2NAzlqsOk8a3itjqm3hCkz3BOjZMCa3tN1bbB95ne4QJQuLOr40g5XG7m7dnlaGfemze1Ppo8a5m9HozSBqXKWis3JkrDYDi4MnDgtfZZ+v8ulPgkY8Iwyn+1Rjf9I8nb+89+vQujXEXNL5aaWMTMiJK+ys/k2Uhx/9mqXKyOuau1lSZpVUi55ibNsKRxXItv44pkNJN47Ddm7Epx7kj9WcTiw+B5HxfvaWa0aHTDRmv7r5Rpxp7GNt28U6bdVQw0Aays/6tMKwFTz+pjwD03okZYNo46YaswHbIAITWUkYsNmonSGqt6rrazpS6hWnvM4hQoXSlEOIKl5eGjnQt/AnZC0ye+RGHG5UjExcMG2VAaQUoiBm0wdH8WmoOxJfoYpVOdUxHTqBjzyQjIgcq5k8+iC6gbsVCJJAS/YMqvNBoshJZX733yQGhpr1NV5MGSEnQvstkX/zNE0jEeBsbOLV320U6k7XrfQNqEtDFYa/T++wv1/cmFOYLc+Guh3C0SywU8LJM+ZlNJFbqHTmMeE0R0JSwveAyOQY9IHuKnBSSXg41nWuTnq0+tHK0j1O+47GWiouzUScSwLmyx8Jp4HYSsg84zUolJVFQuEaF588jvlaaE=
   on:
     python: 3.6
     repo: uc-cdis/dictionaryutils
@@ -23,7 +22,3 @@ deploy:
 after_deploy:
 - pip install gen3git
 - gen3git release
-env:
-  global:
-  - PIPENV_IGNORE_VIRTUALENVS=1
-  - secure: dTzFssG7XUPO/tQqdboPyEumpBp4eCl9Na6s2BD6VAhdJxs3zXEzyFq8YOuO5nnpgUNUd2w11wltciHevc/NUry6tZE7SCQMG5JCf8c9hnj3c2Rgmi2ns2CyeLi6SAN6FRNMDu/194ahwPdy00VBmE47dxZpcwnkrJo08WQWX42gvErIxAEHl+O0IINQJ1zvLcWV7WiConk8J30gn6dgq3I19fdbRq4Moc8gw8n9/K2sYn+7tKQm1DEHzQuEKe3iWidCexZnf89cE3oT4o5cv2r2ZnN1SHpuERJsawuyg9kLpbMdexnaHOSNGJ4XNAAe1VZnDtBA86kYRvs6iPM0OBzDPu6vyYbQU/eIqL70G45FKyqLgB/+qCpgz3lXnVPuSyGP+jObshFLwRgT57oCwoeVc6J1m5p3oGMu3AX+BUpIURrTsQjJARAy5DKVlUkUPZYktF8jCxlrPsIoRv8TmzFYcY+5IRGXVEMftHsi42INYqp3oV3CYE9TvcNJw7mgAndX82L61oBFahR7tFfiinoiedIabemU3tKX9YySRQd694U5L2WQSXjxfGF+FuJ0czB+LRDMJKVqx1jcsod3B1PIy0l3RY713qd7vnO7YibsEN3CFCTkUvw6nXAxtPmdxHzDbVDdPhcGC6euc7RUYE+vph3vSEDM+YRnwqaj/00=
