@@ -137,12 +137,20 @@ def test_arrays_have_items():
 
 
 def test_file_size_is_integer():
+    """
+    If a property is not required, `null` type is automatically
+    appended to the list of allowed types. `file_size` must either
+    be of type `integer` or `null`.
+    """
     for schema in dictionary.schema.values():
         props = schema.get("properties", {})
         if "file_size" in props:
-            t = props["file_size"].get("type")
-            assert (
-                t == "integer"
-            ), 'Property "file_size" of node "{}" should be of type "integer", but is of type "{}".'.format(
-                schema["id"], t
+            types = props["file_size"].get("type")
+            if not isinstance(types, list):
+                types = [types]
+            assert sorted(types) == ["integer"] or sorted(types) == [
+                "integer",
+                "null",
+            ], 'Property "file_size" of node "{}" should be of type "integer" or ["integer", "null"], but is of type "{}".'.format(
+                schema["id"], types
             )
