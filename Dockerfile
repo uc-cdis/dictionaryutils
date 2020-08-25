@@ -13,8 +13,10 @@ RUN apk --no-cache add \
     && mkdir -p /usr/share/dict/ \
     && aspell -d en dump master > /usr/share/dict/words
 
-COPY dev-requirements.txt /dictionaryutils/dev-requirements.txt
-RUN pip install -r /dictionaryutils/dev-requirements.txt
+RUN pip install poetry==1.0.0
+COPY . /src/
+WORKDIR /src
+RUN python -m venv /env && . /env/bin/activate && poetry install
 
 COPY . /dictionaryutils
 
