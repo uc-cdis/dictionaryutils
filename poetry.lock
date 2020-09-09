@@ -139,7 +139,7 @@ requests = "^2.18.0"
 rstr = "2.2.6"
 
 [package.source]
-reference = "7808e51ba36d6b5cfb5df2efa74b6f82b1efa9cc"
+reference = "1a7e9f9c7f9e8c90c8c00375078e14179e123c8d"
 type = "git"
 url = "https://github.com/uc-cdis/data-simulator.git"
 [[package]]
@@ -598,7 +598,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "unittest2", "jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "8f3a731267cda720ed2d3a4676c8391f110f6c429a596041ebe873c2dd990f0a"
+content-hash = "87673d1dc7eff7fc04ccb04e935cc500fe9519f388cf19703ea20056eca36dde"
 lock-version = "1.0"
 python-versions = "~3.5 || ~3.6"
 
