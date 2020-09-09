@@ -142,6 +142,7 @@ rstr = "2.2.6"
 reference = "1a7e9f9c7f9e8c90c8c00375078e14179e123c8d"
 type = "git"
 url = "https://github.com/uc-cdis/data-simulator.git"
+
 [[package]]
 category = "dev"
 description = "An implementation of lxml.xmlfile for the standard library"
@@ -598,7 +599,7 @@ docs = ["sphinx", "jaraco.packaging (>=3.2)", "rst.linker (>=1.9)"]
 testing = ["pathlib2", "unittest2", "jaraco.itertools", "func-timeout"]
 
 [metadata]
-content-hash = "87673d1dc7eff7fc04ccb04e935cc500fe9519f388cf19703ea20056eca36dde"
+content-hash = "c4706b24e9d8c79b99aa6f03b8f9ac90eb6cab5d4e656a4951488e09eaafa437"
 lock-version = "1.0"
 python-versions = "~3.5 || ~3.6"
 

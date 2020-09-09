@@ -10,7 +10,7 @@ repository = "https://github.com/uc-cdis/dictionaryutils"
 [tool.poetry.dependencies]
 python = "~3.5 || ~3.6"
 PyYAML = "~=5.1"
-jsonschema = ">2.5,<4.0"
+jsonschema = ">=2.5,<4.0"
 cdislogging = "^1.0.0"
 requests = "~=2.18"
 
@@ -19,7 +19,6 @@ nose = ">=1.3.7,<2.0.0"
 cdislogging = "^1.0.0"
 pytest = "^5.4.3"
 gen3datamodel = "3.0.2"
-jsonschema = ">=2.5,<4.0"
 data-simulator = {git = "https://github.com/uc-cdis/data-simulator.git", rev = "1.3.1"}
 
 [build-system]
