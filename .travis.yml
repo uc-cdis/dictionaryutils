@@ -9,6 +9,7 @@ before_script:
 script:
 - "./run_tests.sh"
 before_deploy:
+- pip install poetry
 - poetry config pypi-token.pypi $PYPI_API_TOKEN
 - poetry build -f sdist
 deploy:
