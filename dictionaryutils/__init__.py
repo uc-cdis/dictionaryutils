@@ -240,27 +240,43 @@ class DataDictionary(object):
         else:
             return obj
 
+    def get_required_link_names(self, links):
+        required_links = []
+        for link in links:
+            if "subgroup" in link:
+                required_links.extend(self.get_required_link_names(link["subgroup"]))
+            else:
+                if link["required"]:
+                    required_links.append(link["name"])
+        return required_links
+
     def allow_nulls(self):
         """
-        Adds "none" to the types of non required fields in the dictionary.
-        This is done so we can remove properties from entities by updating the property to null.
+        Adds "none" to the types of non-required fields in the dictionary.
+        This is done so we can remove properties/links from entities by
+        updating the property to null.
         """
         for node_properties in self.schema.values():
-            required = node_properties.get("required", [])
+            required = node_properties.get("required", []).copy()
+            required.extend(
+                self.get_required_link_names(node_properties.get("links", []))
+            )
+
             for prop_id, prop in node_properties.get("properties", {}).items():
-                if (
-                    prop_id not in required
-                    and "type" in prop
-                    and "null" not in prop["type"]
-                ):
+                if prop_id in required:
+                    continue
+
+                if "type" in prop and "null" not in prop["type"]:
+                    # add null type to optional props and links
                     if not isinstance(prop["type"], list):
                         prop["type"] = [prop["type"]]
-                    prop["type"] += ["null"]
-                elif (
-                    prop_id not in required
-                    and "enum" in prop
-                    and None not in prop["enum"]
-                ):
+                    prop["type"].append("null")
+                elif "enum" in prop and None not in prop["enum"]:
+                    # add null type to optional enums
                     if not isinstance(prop["enum"], list):
                         prop["enum"] = [prop["enum"]]
-                    prop["enum"] += [None]
+                    prop["enum"].append(None)
+                elif "anyOf" in prop:
+                    prop["anyOf"].append({"type": "null"})
+                elif "oneOf" in prop:
+                    prop["oneOf"].append({"type": "null"})
