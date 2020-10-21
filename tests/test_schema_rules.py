@@ -26,3 +26,11 @@ def test_lowercase_ids():
             assert (
                 schema["id"] == schema["id"].lower()
             ), "The id in {} should be lower case".format(schema["id"])
+
+
+def test_id_length():
+    for schema in dictionary.schema.values():
+        if "id" in schema:
+            assert (
+                len(schema["id"]) <= 63
+            ), "The id in {} should be at most 63 characters".format(schema["id"])
