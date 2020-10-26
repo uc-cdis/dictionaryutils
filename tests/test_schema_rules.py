@@ -28,9 +28,15 @@ def test_lowercase_ids():
             ), "The id in {} should be lower case".format(schema["id"])
 
 
-def test_id_length():
+def test_nodeid_length():
+    prefix_len = len("node_")
+    postfix_len = len("_node_id_idx")
+    max_len = 63 - (prefix_len + postfix_len)
     for schema in dictionary.schema.values():
         if "id" in schema:
+            nodeid_len = sum(map(lambda x: len(x), schema["id"].split("_")))
             assert (
-                len(schema["id"]) <= 63
-            ), "The id in {} should be at most 63 characters".format(schema["id"])
+                nodeid_len <= max_len
+            ), "The id in {} should be at most {} characters".format(
+                schema["id"], max_len
+            )
