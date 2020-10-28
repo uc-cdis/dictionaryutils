@@ -26,3 +26,21 @@ def test_lowercase_ids():
             assert (
                 schema["id"] == schema["id"].lower()
             ), "The id in {} should be lower case".format(schema["id"])
+
+
+def test_nodeid_length():
+    # prepended to node id: (https://github.com/uc-cdis/psqlgraph/blob/3.0.0/psqlgraph/base.py#L14)
+    prefix_len = len("node_")
+    # postpended to node id: (https://github.com/uc-cdis/psqlgraph/blob/3.0.0/psqlgraph/node.py#L121)
+    postfix_len = len("_node_id_idx")
+    # maximum identifier allowed in postgres is 63 characters:
+    max_len = 63 - (prefix_len + postfix_len)
+    for schema in dictionary.schema.values():
+        if "id" in schema:
+            # (https://github.com/uc-cdis/gdcdatamodel/blob/daa709e1a71e0b8985f306c0a6bffe439ee18be7/gdcdatamodel/models/__init__.py#L161)
+            nodeid_len = len(schema["id"].replace("_", ""))
+            assert (
+                nodeid_len <= max_len
+            ), "The id in {} should be at most {} characters".format(
+                schema["id"], max_len
+            )
