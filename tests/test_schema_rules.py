@@ -41,6 +41,6 @@ def test_nodeid_length():
             nodeid_len = len(schema["id"].replace("_", ""))
             assert (
                 nodeid_len <= max_len
-            ), "The id in {} should be at most {} characters".format(
+            ), "The id in {} should be at most {} characters (not counting underscores)".format(
                 schema["id"], max_len
             )
