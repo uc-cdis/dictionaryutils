@@ -207,6 +207,8 @@ class DataDictionary(object):
         base, ref = value.split("#", 1)
 
         if base:
+            if base not in self.resolvers:
+                raise Exception(f"'{base}' not in {list(self.resolvers.keys())}")
             resolver, new_root = self.resolvers[base]
             referrer, resolution = resolver.resolve(value)
             self.resolve_schema(resolution, new_root)
