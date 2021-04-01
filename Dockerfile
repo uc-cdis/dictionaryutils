@@ -1,4 +1,4 @@
-FROM quay.io/cdis/python-nginx:chore_rust_install
+FROM quay.io/cdis/python-nginx:pybase3-1.5.0
 
 RUN pip install --upgrade pip
 RUN apk add --update \
