@@ -1,22 +1,21 @@
-FROM python:3.6-alpine
+FROM quay.io/cdis/python-nginx:pybase3-1.5.0
 
-RUN apk --no-cache add \
-        aspell \
-        aspell-en \
-        ca-certificates \
-        gcc \
-	git \
-        libffi-dev \
-        musl-dev \
-        postgresql-dev \
-    && pip install --upgrade pip \
+RUN pip install --upgrade pip
+RUN apk add --update \
+    postgresql-libs postgresql-dev libffi-dev libressl-dev \
+    linux-headers musl-dev gcc g++ \
+    curl bash git vim logrotate
+RUN apk --no-cache add --update \
+    aspell aspell-en ca-certificates \
     && mkdir -p /usr/share/dict/ \
     && aspell -d en dump master > /usr/share/dict/words
 
-RUN pip install poetry==1.0.0
+RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 COPY . /src/
 WORKDIR /src
-RUN python -m venv /env && . /env/bin/activate && poetry install
+RUN source $HOME/.poetry/env \
+    && poetry config virtualenvs.create false \
+    && poetry install -vv --no-interaction
 
 COPY . /dictionaryutils
 
