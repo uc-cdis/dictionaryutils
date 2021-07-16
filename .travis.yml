@@ -1,15 +1,18 @@
 language: python
 dist: xenial
-python: 3.6
+python: 3.8
 env:
   global:
   - secure: WYdy6W2pgm9L411IRzBuZHqTNtLPdn1Yyhyl5voBmZeLFla+H84BnjenepwRK0aPy+1tetZGaye/ChM5ewQJVR7Lk0prhbhppP5UwOtQMJh6fm20W3GYuclnnJzQ/VGcRqkqiTHvvkD9E3AgNlFzL1Q1lAZKImBjEOaXF5eN2d5DD90fZkWzrIHVrVO72Pnx9qnuJGGc+1RnS11TR+viijQK8zKxB2G414BVZ4j1apHYyruy0xUnyZ/PJh9GlFYs4lBNdWuHhCQo5MZcZr5fqQZFCmaxSg3NxSd5eGjQxqc1QnbULgDQwuFABv/5VbZWdzmM60vSQuMl1G3uEgWAx6VxFBIgXw8rAJ1Y+KukTwAjVM8zdrZ99vcjTTInNsjs5IpEFr+kaXplvcWFw96kLhOP3lfyjYEFcwt40Q25qhM1QqOR01I9aSnICbvp5SXiKRoZr1QwfD1m4aRbSmsshWlW79RiKijXzP77tA2Tngso9m12bSxY3geS2Scamh8JlXmUE0cPqyZeKeS4tel/Seds/5r0zwHDUQYxRyq8HAeoWqMwg90qptoOUOC6WCklVdiEe1OdxwfoGbRBH0tkeRQFhwmhRItwkpJa0SrSf1nMGUMTlzXfc5CPbXBiPwIOgKKjfrh3NwS1JksAI7XPxDWTmnygKW+TNjRM3aWx65Y=
+install:
+  - curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
+  - source $HOME/.poetry/env
+  - poetry install -vv
 before_script:
 - git clone https://github.com/uc-cdis/datadictionary && (cd datadictionary && yes | python setup.py install)
 script:
 - "./run_tests.sh"
 before_deploy:
-- pip install poetry
 - poetry config pypi-token.pypi $PYPI_API_TOKEN
 - poetry build -f sdist
 deploy:
@@ -17,7 +20,7 @@ deploy:
   script: poetry publish -n -vv
   skip_cleanup: true
   on:
-    python: 3.6
+    python: 3.8
     repo: uc-cdis/dictionaryutils
     tags: true
 after_deploy:
