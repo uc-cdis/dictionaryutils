@@ -10,7 +10,7 @@ repository = "https://github.com/uc-cdis/dictionaryutils"
 [tool.poetry.dependencies]
 python = ">=3.6,<=3.8"
 PyYAML = "~=5.1"
-jsonschema = ">= 2.5, < 4.0"
+jsonschema = ">=2.5"
 cdislogging = "^1.0.0"
 requests = "~=2.18"
 
