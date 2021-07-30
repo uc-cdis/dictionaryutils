@@ -13,6 +13,7 @@ PyYAML = "~=5.1"
 jsonschema = ">=2.5,<4"
 cdislogging = "^1.0.0"
 requests = "~=2.18"
+gdcdictionary = "^1.0.0"
 
 [tool.poetry.dev-dependencies]
 nose = ">=1.3.7,<2.0.0"
