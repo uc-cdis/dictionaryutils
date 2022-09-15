@@ -1,6 +1,6 @@
 FROM quay.io/cdis/python-nginx:pybase3-1.5.0
 
-RUN pip install --upgrade pip
+RUN pip install --upgrade pip poetry
 RUN apk add --update \
     postgresql-libs postgresql-dev libffi-dev libressl-dev \
     linux-headers musl-dev gcc g++ \
@@ -10,11 +10,9 @@ RUN apk --no-cache add --update \
     && mkdir -p /usr/share/dict/ \
     && aspell -d en dump master > /usr/share/dict/words
 
-RUN curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
 COPY . /src/
 WORKDIR /src
-RUN source $HOME/.poetry/env \
-    && poetry config virtualenvs.create false \
+RUN poetry config virtualenvs.create false \
     && poetry install -vv --no-interaction
 
 COPY . /dictionaryutils
