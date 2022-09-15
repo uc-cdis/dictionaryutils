@@ -10,13 +10,8 @@ if [[ -d ../.git && -d ../gdcdictionary ]]; then
   )
 fi
 
-# Installing poetry using bootstrap script instead of pip install poetry to avoid any dependency conflicts. 
-curl -sSL https://raw.githubusercontent.com/python-poetry/poetry/master/get-poetry.py | python
-
-source $HOME/.poetry/env
-
+pip install poetry
 which poetry
-
 poetry install -v
 
 # Here is a story. While updating data-simulator the new dependency was introduced there: gen3dictionary.
