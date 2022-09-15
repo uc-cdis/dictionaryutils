@@ -1,6 +1,6 @@
 FROM quay.io/cdis/python-nginx:pybase3-1.5.0
 
-RUN pip install --upgrade pip poetry
+RUN pip install --upgrade pip
 RUN apk add --update \
     postgresql-libs postgresql-dev libffi-dev libressl-dev \
     linux-headers musl-dev gcc g++ \
@@ -12,7 +12,9 @@ RUN apk --no-cache add --update \
 
 COPY . /src/
 WORKDIR /src
-RUN poetry config virtualenvs.create false \
+
+RUN pip install poetry \
+    && poetry config virtualenvs.create false \
     && poetry install -vv --no-interaction
 
 COPY . /dictionaryutils
