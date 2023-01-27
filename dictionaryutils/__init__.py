@@ -59,7 +59,9 @@ def load_schemas_from_url(url, logger, schemas=None, resolvers=None):
     try:
         r = requests.get(url)
     except Exception as e:
-        error_msg = "{}: {}".format(error_msg, e.message)
+        error_msg = "{}: {}".format(
+            error_msg, e.message if hasattr(e, "message") else e
+        )
         logger.exception(error_msg)
         raise DictionaryError(error_msg)
     if r.status_code != 200:
