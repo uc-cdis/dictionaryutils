@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dictionaryutils"
-version = "3.4.4"
+version = "3.4.5"
 description = "Python wrapper and metaschema for datadictionary."
 authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
