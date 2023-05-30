@@ -278,7 +278,7 @@ class DataDictionary(object):
                     if not isinstance(prop["enum"], list):
                         prop["enum"] = [prop["enum"]]
                     prop["enum"].append(None)
-                elif "anyOf" in prop:
+                elif "anyOf" in prop and {"type": "null"} not in prop["anyOf"]:
                     prop["anyOf"].append({"type": "null"})
-                elif "oneOf" in prop:
+                elif "oneOf" in prop and {"type": "null"} not in prop["oneOf"]:
                     prop["oneOf"].append({"type": "null"})
