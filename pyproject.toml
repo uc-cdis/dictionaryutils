@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dictionaryutils"
-version = "3.4.6"
+version = "3.4.7"
 description = "Python wrapper and metaschema for datadictionary."
 authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
@@ -9,10 +9,11 @@ repository = "https://github.com/uc-cdis/dictionaryutils"
 
 [tool.poetry.dependencies]
 python = ">=3.6,<3.10"
-PyYAML = "~=5.1"
+PyYAML = "*"
 jsonschema = ">=2.5,<4"
 cdislogging = "^1.0.0"
 requests = "~=2.18"
+nose = "*"
 
 [tool.poetry.dev-dependencies]
 nose = ">=1.3.7,<2.0.0"
