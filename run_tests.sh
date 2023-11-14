@@ -22,6 +22,6 @@ if [[ -d ../.git && -d ../gdcdictionary ]]; then
   pip uninstall -y gen3dictionary
 fi
 
-nosetests -s -v
+pytest tests -s -v
 python bin/dump_schema.py
 set +e
