@@ -8,7 +8,7 @@ readme = "README.md"
 repository = "https://github.com/uc-cdis/dictionaryutils"
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = ">=3.9, <4"
 PyYAML = "*"
 jsonschema = ">=2.5,<4"
 cdislogging = "^1.0.0"
