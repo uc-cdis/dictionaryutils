@@ -11,7 +11,7 @@ install:
 before_script:
 - git clone https://github.com/uc-cdis/datadictionary && (cd datadictionary && yes | poetry install)
 script:
-- "./run_tests.sh"
+- echo Unit testing is now done in GH Actions, this just pushing to pypi as necessary
 before_deploy:
 - poetry config pypi-token.pypi $PYPI_API_TOKEN
 - poetry build -f sdist
@@ -25,4 +25,3 @@ deploy:
     tags: true
 after_deploy:
 - pip install gen3git
-- gen3git release
