@@ -25,4 +25,3 @@ deploy:
     tags: true
 after_deploy:
 - pip install gen3git
-- gen3git release
