@@ -16,7 +16,6 @@ requests = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
-data-simulator = {git = "https://github.com/uc-cdis/data-simulator.git", rev = "1.5.1"}
 
 [build-system]
 requires = ["poetry-core"]
