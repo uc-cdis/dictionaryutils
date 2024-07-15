@@ -11,13 +11,11 @@ repository = "https://github.com/uc-cdis/dictionaryutils"
 python = ">=3.9, <4"
 PyYAML = "*"
 jsonschema = "4.17.3"
-cdislogging = "^1.0.0"
-requests = "~=2.18"
+cdislogging = "*"
+requests = "*"
 
 [tool.poetry.dev-dependencies]
-cdislogging = "^1.0.0"
-pytest = "^5.4.3"
-# gen3datamodel = {git = "https://github.com/uc-cdis/gen3datamodel.git", branch = "chore/upgrade-jsonschema"}
+pytest = "*"
 data-simulator = {git = "https://github.com/uc-cdis/data-simulator.git", branch = "chore/upgrade-jsonschema"}
 
 [build-system]
