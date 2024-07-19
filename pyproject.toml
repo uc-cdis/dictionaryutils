@@ -10,13 +10,14 @@ repository = "https://github.com/uc-cdis/dictionaryutils"
 [tool.poetry.dependencies]
 python = ">=3.9, <4"
 PyYAML = "*"
-jsonschema = "*"
+# limiting to a version where RefResolver is deprecated but still functioning
+jsonschema = "<=4.23.0"
 cdislogging = "*"
 requests = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
-data-simulator = {git = "https://github.com/uc-cdis/data-simulator.git", branch = "chore/update-jsonschema"}
+# data-simulator = {git = "https://github.com/uc-cdis/data-simulator.git", branch = "chore/update-jsonschema"}
 
 [build-system]
 requires = ["poetry>=0.12"]
