@@ -1,5 +1,5 @@
-from gdcdatamodel.models import *
+from gen3datamodel.models import *
 
 
 def test_datamodel():
-    from gdcdatamodel import models
+    from gen3datamodel import models
