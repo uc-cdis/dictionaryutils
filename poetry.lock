@@ -167,7 +167,7 @@ files = [
 
 [[package]]
 name = "data-simulator"
-version = "1.6.3"
+version = "1.6.4"
 description = "Gen3 Data Simulator"
 optional = false
 python-versions = ">=3.9,<4"
@@ -176,8 +176,8 @@ develop = false
 
 [package.dependencies]
 cdislogging = "*"
-dictionaryutils = {git = "https://github.com/uc-cdis/dictionaryutils", branch = "chore/update-jsonschema"}
-gen3datamodel = {git = "https://github.com/uc-cdis/gen3datamodel", rev = "3.2.0"}
+dictionaryutils = {git = "https://github.com/uc-cdis/dictionaryutils", rev = "3.4.11"}
+gen3datamodel = {git = "https://github.com/uc-cdis/gen3datamodel", rev = "3.2.1"}
 gen3dictionary = "*"
 psqlgraph = "*"
 pyyaml = "<7"
@@ -187,8 +187,8 @@ rstr = ">=3,<4"
 [package.source]
 type = "git"
 url = "https://github.com/uc-cdis/data-simulator.git"
-reference = "chore/update-jsonschema"
-resolved_reference = "30651f85c745ead9e94b0f5343520cc133739c82"
+reference = "1.6.4"
+resolved_reference = "8c4d893cae5947a4da5bfd0b3bf3c279e637152a"
 
 [[package]]
 name = "exceptiongroup"
@@ -234,7 +234,7 @@ develop = false
 
 [package.dependencies]
 cdislogging = "*"
-dictionaryutils = {git = "https://github.com/uc-cdis/dictionaryutils", branch = "chore/update-jsonschema"}
+dictionaryutils = {git = "https://github.com/uc-cdis/dictionaryutils", rev = "3.4.11"}
 gdcdictionary = {git = "https://github.com/NCI-GDC/gdcdictionary.git", rev = "release/py3"}
 jsonschema = "*"
 psqlgraph = "~=3.0"
@@ -247,8 +247,8 @@ strict-rfc3339 = "==0.7"
 [package.source]
 type = "git"
 url = "https://github.com/uc-cdis/gen3datamodel"
-reference = "3.2.0"
-resolved_reference = "4d0a73a23a97865ae65683ad7b93414e7b377a01"
+reference = "3.2.1"
+resolved_reference = "97d67c7bd2539f9d90ea0ccb899185ebe2ecc24c"
 
 [[package]]
 name = "gen3dictionary"
@@ -775,4 +775,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9, <4"
-content-hash = "42eb2b4ade2c2da4749f47b8b51f0d44ebd098a078eefc2bd88eb5c84f94ed78"
+content-hash = "4308b9656aeff5bba4e1e918f473adccb9a257545d05a76b8e24f6a6aa9be6f0"

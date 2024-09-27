@@ -17,7 +17,7 @@ requests = "*"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
-data-simulator = {git = "https://github.com/uc-cdis/data-simulator.git", branch = "chore/update-jsonschema"}
+data-simulator = {git = "https://github.com/uc-cdis/data-simulator.git", rev = "1.6.4"}
 
 [build-system]
 requires = ["poetry>=0.12"]
