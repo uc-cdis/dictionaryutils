@@ -167,7 +167,7 @@ files = [
 
 [[package]]
 name = "data-simulator"
-version = "1.6.4"
+version = "1.6.5"
 description = "Gen3 Data Simulator"
 optional = false
 python-versions = ">=3.9,<4"
@@ -176,8 +176,8 @@ develop = false
 
 [package.dependencies]
 cdislogging = "*"
-dictionaryutils = {git = "https://github.com/uc-cdis/dictionaryutils", rev = "3.4.11"}
-gen3datamodel = {git = "https://github.com/uc-cdis/gen3datamodel", rev = "3.2.1"}
+dictionaryutils = ">=3.4.11"
+gen3datamodel = ">=3.2.1"
 gen3dictionary = "*"
 psqlgraph = "*"
 pyyaml = "<7"
@@ -187,8 +187,8 @@ rstr = ">=3,<4"
 [package.source]
 type = "git"
 url = "https://github.com/uc-cdis/data-simulator.git"
-reference = "1.6.4"
-resolved_reference = "8c4d893cae5947a4da5bfd0b3bf3c279e637152a"
+reference = "update-branches"
+resolved_reference = "2209f163b0744583ee787b7f1778f2147af9029a"
 
 [[package]]
 name = "exceptiongroup"
@@ -220,35 +220,30 @@ PyYAML = "*"
 [package.source]
 type = "git"
 url = "https://github.com/NCI-GDC/gdcdictionary.git"
-reference = "release/py3"
-resolved_reference = "b5db4e815794c0544bbc9f4b6a16fc5b0475363b"
+reference = "2.0.0"
+resolved_reference = "0427dc737a7cc165868f3d065529d20a68a20ac1"
 
 [[package]]
 name = "gen3datamodel"
-version = "3.2.0"
+version = "3.2.3"
 description = ""
 optional = false
-python-versions = "^3.9"
-files = []
-develop = false
+python-versions = "<4.0,>=3.9"
+files = [
+    {file = "gen3datamodel-3.2.3-py3-none-any.whl", hash = "sha256:1d892e399282e8a1d3f471a7905c62f59e9deb57568d20aba15e7d9df276a678"},
+    {file = "gen3datamodel-3.2.3.tar.gz", hash = "sha256:df2bda8be42879d0b25df13665aaacee854037b1509b62dc2a21df8e25f07d16"},
+]
 
 [package.dependencies]
 cdislogging = "*"
-dictionaryutils = {git = "https://github.com/uc-cdis/dictionaryutils", rev = "3.4.11"}
-gdcdictionary = {git = "https://github.com/NCI-GDC/gdcdictionary.git", rev = "release/py3"}
+dictionaryutils = ">=3.4.11"
 jsonschema = "*"
-psqlgraph = "~=3.0"
-psycopg2-binary = "~=2.8.2"
-pyrsistent = "==0.15.4"
+psqlgraph = ">=3.0,<4.0"
+psycopg2-binary = ">=2.8.2,<2.9.0"
+pyrsistent = "0.15.4"
 pytz = "*"
-sqlalchemy = "==1.3.3"
-strict-rfc3339 = "==0.7"
-
-[package.source]
-type = "git"
-url = "https://github.com/uc-cdis/gen3datamodel"
-reference = "3.2.1"
-resolved_reference = "97d67c7bd2539f9d90ea0ccb899185ebe2ecc24c"
+sqlalchemy = "1.3.3"
+strict-rfc3339 = "0.7"
 
 [[package]]
 name = "gen3dictionary"
@@ -775,4 +770,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.9, <4"
-content-hash = "4308b9656aeff5bba4e1e918f473adccb9a257545d05a76b8e24f6a6aa9be6f0"
+content-hash = "a898d873a52d59c3cffdee05a5ef2e7917cc4d79391f7f701a70a90f55cafca7"
