@@ -10,14 +10,6 @@ if [[ -d ../.git && -d ../gdcdictionary ]]; then
   )
 fi
 
-# Here is a story. While updating data-simulator the new dependency was introduced there: gen3dictionary.
-# And because this new dependency installed after the setup.py for testing the dictionary is run,
-# it essentially tests gen3dictionary. :shrug:
-# Removing if and only we're under `dictionary/` folder, essentially testing other dictionary.
-if [[ -d ../.git && -d ../gdcdictionary ]]; then
-  pip uninstall -y gen3dictionary
-fi
-
 pytest tests -s -v
 python bin/dump_schema.py
 set +e
