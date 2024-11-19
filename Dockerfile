@@ -1,22 +1,43 @@
-FROM quay.io/cdis/python-nginx:pybase3-1.5.0
+ARG AZLINUX_BASE_VERSION=master
 
-RUN pip install --upgrade pip
-RUN apk add --update \
-    postgresql-libs postgresql-dev libffi-dev libressl-dev \
-    linux-headers musl-dev gcc g++ \
-    curl bash git vim logrotate
-RUN apk --no-cache add --update \
-    aspell aspell-en ca-certificates \
-    && mkdir -p /usr/share/dict/ \
-    && aspell -d en dump master > /usr/share/dict/words
+# Base stage with python-build-base
+FROM quay.io/cdis/python-nginx-al:${AZLINUX_BASE_VERSION} AS base
 
-COPY . /src/
-WORKDIR /src
+ENV appname=dictionaryutils
 
-RUN pip install poetry \
-    && poetry config virtualenvs.create false \
-    && poetry install -vv --no-interaction
+COPY --chown=gen3:gen3 . /${appname}
 
-COPY . /dictionaryutils
+WORKDIR /${appname}
 
-CMD cd /dictionary; rm -rf build dictionaryutils dist gdcdictionary.egg-info; python setup.py install --force && cp -r /dictionaryutils . && cd /dictionary/dictionaryutils; pip uninstall -y gen3dictionary; pytest tests -s -v; export SUCCESS=$?; cd ..; rm -rf build dictionaryutils dist gdcdictionary.egg-info; exit $SUCCESS
+# Builder stage
+FROM base AS builder
+
+RUN dnf install -y python3-devel postgresql-devel gcc
+
+USER gen3
+
+COPY poetry.lock pyproject.toml /${appname}/
+
+RUN poetry install -vv --no-interaction --without dev
+
+COPY --chown=gen3:gen3 . /${appname}
+
+# Run poetry again so this app itself gets installed too
+# include dev because we need data-simulator to run the unit tests.
+RUN poetry install -vv --no-interaction
+
+ENV  PATH="$(poetry env info --path)/bin:$PATH"
+
+# Final stage
+FROM base
+
+COPY --from=builder /${appname} /${appname}
+
+# Switch to non-root user 'gen3' for the serving process
+USER gen3
+
+WORKDIR /${appname}
+
+RUN chmod +x "/${appname}/dockerrun.bash"
+
+CMD ["/bin/bash", "-c", "/${appname}/dockerrun.bash"]
