@@ -14,8 +14,6 @@ if [ -f pyproject.toml ]; then
 else
     export USE_POETRY=0
 fi
-# TODO: remove after testing
-echo "Use poetry ${USE_POETRY}"
 
 echo "Removing old dictionaryutils"
 rm -rf build dictionaryutils dist gdcdictionary.egg-info
@@ -41,23 +39,11 @@ fi
 echo "Reinstall dictionary"
 poetry run pip install ..
 
-poetry show
-
 echo "The following schemas from dictionary will be tested:"
 ls `poetry run python -c "from gdcdictionary import SCHEMA_DIR; print(SCHEMA_DIR)"`
 
 echo "Ready to run tests"
 poetry run pytest -v tests
 export SUCCESS=$?
-echo "Success = ${SUCCESS}"
-
-# TODO: remove after testing
-echo "Ready to dump schema"
-poetry run python bin/dump_schema.py
-echo "Number of schemas in artifact"
-grep -o ".yaml\"" artifacts/schema.json | wc -l
-
-echo "Clean up"
-rm -rf build dictionaryutils dist gdcdictionary.egg-info
 
 exit $SUCCESS
