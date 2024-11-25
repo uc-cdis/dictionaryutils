@@ -21,8 +21,7 @@ Then from the directory containing the `gdcdictionary` directory run `testdict`.
 If you wish to generate fake simulated data you can also do that with dictionaryutils and the data-simulator.
 
 ```
-simdata() { docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata quay.io/cdis/dictionaryutils:master /bin/sh -c "cd /dictionary && python setup.py install --force; python /src/datasimulator/bin/data-simulator simulate --path /simdata/ $*; export SUCCESS=$?; rm -rf build dictionaryutils dist gdcdictionary.egg-info; chmod -R a+rwX /simdata; exit $SUCCESS"; }
-simdataurl() { docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata quay.io/cdis/dictionaryutils:master /bin/sh -c "python /src/datasimulator/bin/data-simulator simulate --path /simdata/ $*; chmod -R a+rwX /simdata"; }
+simdata() { docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata quay.io/cdis/dictionaryutils:master; /bin/bash -c "cd /dictionary/dictionaryutils; bash dockerrun.bash; cd /dictionary/dictionaryutils; poetry run python bin/simulate_data.py --path /dictionary/simdata $*; export SUCCESS=$?; cd /dictionary; rm -rf build dictionaryutils dist gdcdictionary.egg-info; chmod -R a+rwX /simdata; exit $SUCCESS "; }
 
 ```
 
@@ -39,11 +38,17 @@ The `--max_samples` argument will define a default number of nodes to simulate, 
 ```
 Then run the following:
 ```
-docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata quay.io/cdis/dictionaryutils:master /bin/sh -c "cd /dictionary && python setup.py install --force; python /src/datasimulator/bin/data-simulator simulate --path /simdata/ --program workshop --project project1 --max_samples 10 --node_num_instances_file instances.json; export SUCCESS=$?; rm -rf build dictionaryutils dist gdcdictionary.egg-info; chmod -R a+rwX /simdata; exit $SUCCESS";
+docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata quay.io/cdis/dictionaryutils:master /bin/bash -c "cd /dictionaryutils; bash dockerrun.bash; cd /dictionary/dictionaryutils; poetry run python bin/simulate_data.py --path /simdata/ --program workshop --project project1 --max_samples 10 --node_num_instances_file /dictionary/instances.json; export SUCCESS=$?; rm -rf build dictionaryutils dist gdcdictionary.egg-info; chmod -R a+rwX /simdata; exit $SUCCESS";
 ```
 Then you'll get 100 each of `case` and `demographic` nodes and 10 each of everything else. Note that the above example also defines `program` and `project` names.
 
-You can also run the simulator for an arbitrary json url by using `simdataurl --url https://datacommons.example.com/schema.json`.
+You can also run the simulator for an arbitrary json url with the `--url` parameter. The alias can be simplified to skip the set up of the parent directory virtual env (ie, skip the `docker_run.bash`):
+```
+simdataurl() { docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata quay.io/cdis/dictionaryutils:master /bin/bash -c "python /dictionaryutils/bin/simulate_data.py simulate --path /simdata/ $*; chmod -R a+rwX /simdata"; }
+
+```
+
+Then run `simdataurl --url https://datacommons.example.com/schema.json`.
 
 
 ## Use dictionaryutils to load a dictionary
