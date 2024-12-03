@@ -13,6 +13,12 @@ jobs:
       python-poetry: 'false'
     secrets: inherit
 
+  UnitTest:
+    name: Python Unit Test
+    uses: uc-cdis/.github/.github/workflows/python_unit_test.yaml@master
+    with:
+        python-version: '3.9'
+
   ci:
     name: Build Image and Push
     uses: uc-cdis/.github/.github/workflows/image_build_push.yaml@master
@@ -23,9 +29,3 @@ jobs:
       ECR_AWS_SECRET_ACCESS_KEY: ${{ secrets.ECR_AWS_SECRET_ACCESS_KEY }}
       QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
       QUAY_ROBOT_TOKEN: ${{ secrets.QUAY_ROBOT_TOKEN }}
-
-  UnitTest:
-    name: Python Unit Test
-    uses: uc-cdis/.github/.github/workflows/python_unit_test.yaml@master
-    with:
-        python-version: '3.9'

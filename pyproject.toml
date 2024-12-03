@@ -6,6 +6,9 @@ authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/uc-cdis/dictionaryutils"
+include = [
+  "NOTICE",
+]
 
 [tool.poetry.dependencies]
 python = ">=3.9, <4"
