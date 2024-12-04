@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  Security:
+    name: Security Pipeline
+    uses: uc-cdis/.github/.github/workflows/securitypipeline.yaml@master
+    with:
+      python-poetry: 'false'
+    secrets: inherit
+
+  ci:
+    name: Build Image and Push
+    uses: uc-cdis/.github/.github/workflows/image_build_push.yaml@master
+    with:
+      USE_QUAY_ONLY: true
+    secrets:
+      QUAY_USERNAME: ${{ secrets.QUAY_USERNAME }}
+      QUAY_ROBOT_TOKEN: ${{ secrets.QUAY_ROBOT_TOKEN }}
+
+  UnitTest:
+    name: Python Unit Test
+    uses: uc-cdis/.github/.github/workflows/python_unit_test.yaml@master
+    with:
+        python-version: '3.9'
