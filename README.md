@@ -50,6 +50,17 @@ simdataurl() { docker run --rm -v $(pwd):/dictionary -v $(pwd)/simdata:/simdata 
 
 Then run `simdataurl --url https://datacommons.example.com/schema.json`.
 
+## Using a local build of the Docker image
+
+It is possible to use a local build of the `dictionaryutils` Docker image instead of the master branch stored in `quay`.
+
+From a local copy of the `dictionaryutils` repo, build and tag a Docker image, for example
+```
+docker build -t dictionaryutils-mytag .
+```
+Then use this image in any of the aliases and commands mentioned
+above by replacing `quay.io/cdis/dictionaryutils:master` with `dictionaryutils-mytag`.
+
 
 ## Use dictionaryutils to load a dictionary
 ```
