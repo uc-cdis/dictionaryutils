@@ -2,8 +2,10 @@ from contextlib import contextmanager
 import glob
 import os
 import yaml
-from dictionaryutils import dictionary
+
 from gdcdictionary import SCHEMA_DIR
+
+from dictionaryutils import dictionary
 
 
 def test_required_nodes():

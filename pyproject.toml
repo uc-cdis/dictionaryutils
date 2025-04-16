@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dictionaryutils"
-version = "3.4.12"
+version = "3.5.0"
 description = "Python wrapper and metaschema for datadictionary."
 authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
@@ -17,10 +17,7 @@ PyYAML = "*"
 jsonschema = "<=4.23.0"
 cdislogging = "*"
 requests = "*"
-# set 'develop = true' to prevent over-writing by 'gen3dictionary', similar to
-# https://github.com/uc-cdis/gen3datamodel/blob/190f99885c660a2971ec64522168548e19bea512/Pipfile#L16
-gdcdictionary = {git = "https://github.com/NCI-GDC/gdcdictionary.git", rev = "2.0.0", develop = true}
-
+gen3dictionary = "^2.0.4"
 
 [tool.poetry.dev-dependencies]
 pytest = "*"
