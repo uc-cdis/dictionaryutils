@@ -206,7 +206,11 @@ class DataDictionary(object):
         :returns: JSON Schema pointed to by :param:`value`
 
         """
-        base, ref = value.split("#", 1)
+        try:
+            base, ref = value.split("#", 1)
+        except Exception:
+            print(f"Problem with {value}")
+            raise
 
         if base:
             resolver, new_root = self.resolvers[base]
