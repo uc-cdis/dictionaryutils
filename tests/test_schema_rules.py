@@ -7,12 +7,10 @@ def test_no_mixed_type_in_enum():
     # items. This allows us to set the value to None when the property is not required
     for schema in dictionary.schema.values():
         for prop in schema["properties"].values():
-
             try:
-                some_object_iterator = iter(prop)
+                iter(prop)
             except TypeError as te:
                 assert False, "{}: has non iterable property".format(schema["id"])
-                # print some_object, 'is not iterable'
 
             if "enum" in prop:
                 assert all(

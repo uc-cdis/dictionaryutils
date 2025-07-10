@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dictionaryutils"
-version = "3.5.0"
+version = "3.5.1"
 description = "Python wrapper and metaschema for datadictionary."
 authors = ["CTDS UChicago <cdis@uchicago.edu>"]
 license = "Apache-2.0"
@@ -19,7 +19,7 @@ cdislogging = "*"
 requests = "*"
 gen3dictionary = "^2.0.4"
 
-[tool.poetry.dev-dependencies]
+[tool.poetry.group.dev.dependencies]
 pytest = "*"
 data-simulator = {git = "https://github.com/uc-cdis/data-simulator.git"}
 
